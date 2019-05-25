@@ -22,3 +22,5 @@ model.compile(optimizer=sgd, loss='categorical_crossentropy',
 model.fit(data_train, label_train, batch_size=16, epochs=
 10, verbose=2)
 model.evaluate(data_test, label_test, batch_size=16)
+data_p = np.random.random((1, 100))
+print(model.predict(data_p))
