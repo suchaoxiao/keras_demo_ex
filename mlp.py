@@ -17,6 +17,12 @@ model.add(Dense(16, activation='relu'))
 model.add(Dropout(0.2, seed=3))
 model.add(Dense(10, activation='softmax'))
 sgd = SGD(lr=0.001, momentum=0.9, decay=0.01, nesterov=True)
+from keras.callbacks import ReduceLROnPlateau,CSVLogger
+reduce_lr = ReduceLROnPlateau(monitor='val_loss', factor=0.2,
+                              patience=5, min_lr=0.001)
+csv_logger = CSVLogger('training.log')
+callbacks=[csv_logger]
+
 model.compile(optimizer=sgd, loss='categorical_crossentropy',
               metrics=['accuracy'])
 model.fit(data_train, label_train, batch_size=16, epochs=
